@@ -1,0 +1,35 @@
+{
+  "Index": {
+    "title": "Página de inicio",
+    "loggedIn": "Conectado como {username}",
+    "loggedOut": "Has cerrado sesión.",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "secret": "Página secreta para usuarios conectados",
+    "register": "Registrarse"
+  },
+  "LocaleLayout": {
+    "title": "next-intl con ejemplo de Auth.js"
+  },
+  "Login": {
+    "title": "Iniciar sesión",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión",
+    "error": "{error, select, CredentialsSignin {Nombre de usuario o contraseña inválidos} other {Error desconocido}}"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "Cambiar a {locale, select, es {Español} en {Inglés} other {Desconocido}}"
+  },
+  "Secret": {
+    "title": "Página secreta",
+    "description": "Esta página solo es visible para usuarios conectados."
+  },
+  "Register": {
+    "title": "Registrarse",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Registrarse"
+  }
+}

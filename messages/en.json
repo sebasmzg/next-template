@@ -1,0 +1,35 @@
+{
+  "Index": {
+    "title": "Home",
+    "loggedIn": "Logged in as {username}",
+    "loggedOut": "You are logged out.",
+    "login": "Login",
+    "logout": "Logout",
+    "secret": "Secret page for logged in users",
+    "register": "Register"
+  },
+  "LocaleLayout": {
+    "title": "next-intl with Auth.js example"
+  },
+  "Login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "error": "{error, select, CredentialsSignin {Invalid username or password} other {Unknown error}}"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "Switch to {locale, select, es {Spanish} en {English} other {Unknown}}"
+  },
+  "Secret": {
+    "title": "Secret page",
+    "description": "This page is only visible for logged in users."
+  },
+  "Register": {
+    "title": "Register",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Register"
+  }
+}
