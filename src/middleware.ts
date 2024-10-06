@@ -12,9 +12,7 @@ const publicPages = [
 const intlMiddleware = createMiddleware(routing);
 
 const authMiddleware = withAuth(
-  // Note that this callback is only invoked if
-  // the `authorized` callback has returned `true`
-  // and not for pages listed in `pages`.
+
   (req) => intlMiddleware(req),
   {
     callbacks: {

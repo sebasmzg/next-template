@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
-import { signIn } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import InputField from '../ui/InputField';
+import {useRouter} from 'next/navigation';
+import {signIn} from 'next-auth/react';
+import {useLocale, useTranslations} from 'next-intl';
+import {useState, FormEvent} from 'react';
 import styled from 'styled-components';
+import InputField from '../ui/InputField';
 
 const Form = styled.form`
   display: flex;
@@ -46,7 +46,7 @@ const LoginForm: React.FC = () => {
     const result = await signIn('credentials', {
       redirect: false,
       email,
-      password,
+      password
     });
 
     if (result?.error) {
@@ -61,18 +61,18 @@ const LoginForm: React.FC = () => {
       <InputField
         label={t('username')}
         name="email"
-        type="text"
         onChange={(e) => setEmail(e.target.value)}
+        type="text"
         value={email}
       />
       <InputField
         label={t('password')}
         name="password"
-        type="password"
         onChange={(e) => setPassword(e.target.value)}
+        type="password"
         value={password}
       />
-      {error && <ErrorMessage>{t('error', { error })}</ErrorMessage>}
+      {error && <ErrorMessage>{t('error', {error})}</ErrorMessage>}
       <SubmitButton type="submit">{t('submit')}</SubmitButton>
     </Form>
   );

@@ -1,23 +1,29 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import RegisterForm from '@/components/RegisterForm';
+import {useRouter} from 'next/navigation';
+import {useTranslations} from 'next-intl';
 import PageLayout from '@/components/PageLayout';
-import { useTranslations} from 'next-intl';
-
+import RegisterForm from '@/components/RegisterForm';
 
 const RegisterPage: React.FC = () => {
   const router = useRouter();
   const t = useTranslations('Register');
 
-  const handleRegistration = async (name: string, email: string, password: string) => {
+  const handleRegistration = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({name, email, password})
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -31,9 +37,9 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-   <PageLayout title={t('title')}>
-        <RegisterForm onSubmit={handleRegistration} />
-   </PageLayout>
+    <PageLayout title={t('title')}>
+      <RegisterForm onSubmit={handleRegistration} />
+    </PageLayout>
   );
 };
 

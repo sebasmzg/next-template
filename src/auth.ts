@@ -25,7 +25,6 @@ const auth: AuthOptions = {
           });
 
           const user = await res.json();
-          console.log(user);
           
           if (!res.ok) {
             throw new Error(user.message || "Invalid credentials");

@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import {useTranslations} from 'next-intl';
+import {useState} from 'react';
 import styled from 'styled-components';
 import InputField from '../ui/InputField';
-import { useTranslations } from 'next-intl';
 
 const Form = styled.form`
   display: flex;
@@ -31,10 +31,14 @@ const SubmitButton = styled.button`
 `;
 
 interface RegisterFormProps {
-  onSubmit: (username: string, email: string, password: string) => Promise<void>;
+  onSubmit: (
+    username: string,
+    email: string,
+    password: string
+  ) => Promise<void>;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({onSubmit}) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -51,34 +55,33 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
     }
 
     await onSubmit(name, email, password);
-
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <InputField
-        label={t("name")}
+        label={t('name')}
         name="name"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <InputField
-        label={t("email")}
+        label={t('email')}
         name="email"
         type="text"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <InputField
-        label={t("password")}
+        label={t('password')}
         name="password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      <SubmitButton type="submit">{t("submit")}</SubmitButton>
+      <SubmitButton type="submit">{t('submit')}</SubmitButton>
     </Form>
   );
 };
