@@ -2,6 +2,7 @@ import Navbar from '@/components/NavBar';
 import SessionAuthProvider from '@/context/SessionProvider';
 import {NextIntlClientProvider, useMessages} from 'next-intl';
 import {ReactNode} from 'react';
+import StoreProvider from '../../../storeProvider/StoreProvider';
 
 type Props = {
   children: ReactNode;
@@ -19,8 +20,10 @@ export default function LocaleLayout({children, params: {locale}}: Props) {
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionAuthProvider>
-            <Navbar />
-            {children}
+            <StoreProvider>
+              <Navbar />
+              {children}
+            </StoreProvider>
           </SessionAuthProvider>
         </NextIntlClientProvider>
       </body>

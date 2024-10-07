@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
-import { signOut, useSession } from "next-auth/react";
-import { useLocale } from "next-intl";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import LocaleSwitcher from "./LocaleSwitcher";
+import styled from 'styled-components';
+import {signOut, useSession} from 'next-auth/react';
+import Link from 'next/link';
+import {usePathname} from 'next/navigation';
+import LocaleSwitcher from './LocaleSwitcher';
+import {FaSearch, FaHeart, FaShoppingCart, FaSignOutAlt} from 'react-icons/fa';
+import ShoppingCartButton from '@/ui/ShoopinCart';
+import Search from './Search';
 
-// Estilos de Navbar usando styled-components
 const NavbarWrapper = styled.nav`
   background-color: #fff; /* Fondo blanco */
   padding: 1rem 0;
@@ -27,18 +28,20 @@ const NavLinks = styled.div`
   gap: 1.5rem;
 `;
 
-const StyledLink = styled(Link)<{ $active: boolean }>`
-  color: ${({ $active }) => ($active ? "#000" : "#555")};
-  font-weight: ${({ $active }) => ($active ? "bold" : "normal")}; 
+const StyledLink = styled(Link)<{$active: boolean}>`
+  color: ${({$active}) => ($active ? '#000' : '#555')};
+  font-weight: ${({$active}) => ($active ? 'bold' : 'normal')};
   text-decoration: none;
   padding: 0.5rem 1rem;
-  transition: color 0.3s, border-bottom 0.3s;
-  
+  transition:
+    color 0.3s,
+    border-bottom 0.3s;
+
   &:hover {
-    color: #000; 
+    color: #000;
   }
 
-  ${({ $active }) =>
+  ${({$active}) =>
     $active &&
     `
     border-bottom: 2px solid #000; 
@@ -57,11 +60,26 @@ const SignoutButton = styled.button`
     color: #555;
   }
 `;
+const IconsWrapper = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+`;
+const IconButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  font-size: 1.5rem;
+
+  &:hover {
+    color: #555; /* Cambia de color cuando pasas el cursor */
+  }
+`;
 
 const Navbar = () => {
-  const locale = useLocale();
-  const { data: session } = useSession();
-  const pathname = usePathname(); // Obtiene la ruta actual
+  const {data: session} = useSession();
+  const pathname = usePathname();
 
   return (
     <NavbarWrapper>
@@ -69,31 +87,52 @@ const Navbar = () => {
         {session?.user ? (
           <>
             <NavLinks>
-              <StyledLink href={locale + "/"} $active={pathname === "/"}>
+              <StyledLink href={'/'} $active={pathname === '/'}>
                 Home
               </StyledLink>
-              <StyledLink href={locale + "/secret"} $active={pathname === "/secret"}>
+              <StyledLink
+                href={'/secret'}
+                $active={pathname === '/secret'}
+              >
                 Secret
               </StyledLink>
             </NavLinks>
-            <div>
-              <SignoutButton type="button" onClick={() => signOut()}>Signout</SignoutButton>
-            </div>
+            <IconsWrapper>
+              <LocaleSwitcher />
+              <IconButton aria-label="Search">
+                <Search />
+              </IconButton>
+              <IconButton aria-label="Favorites">
+                <FaHeart cursor={'pointer'} size={26} />
+              </IconButton>
+              <IconButton aria-label="Cart">
+                <ShoppingCartButton />
+              </IconButton>
+              <SignoutButton type="button" onClick={() => signOut()}>
+                <FaSignOutAlt cursor={'pointer'} size={26} />
+              </SignoutButton>
+            </IconsWrapper>
           </>
         ) : (
           <>
             <NavLinks>
-              <StyledLink href={locale + "/"} $active={pathname === "/"}>
+              <StyledLink href={'/'} $active={pathname === '/'}>
                 Home
               </StyledLink>
             </NavLinks>
             <div>
               <NavLinks>
                 <LocaleSwitcher />
-                <StyledLink href={locale + "/login"} $active={pathname === "/login"}>
+                <StyledLink
+                  href={'/login'}
+                  $active={pathname === '/login'}
+                >
                   Login
                 </StyledLink>
-                <StyledLink href={locale + "/register"} $active={pathname === "/register"}>
+                <StyledLink
+                  href={'/register'}
+                  $active={pathname === '/register'}
+                >
                   Register
                 </StyledLink>
               </NavLinks>
