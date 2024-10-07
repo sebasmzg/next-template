@@ -4,6 +4,7 @@ import {useTranslations} from 'next-intl';
 import {useState} from 'react';
 import styled from 'styled-components';
 import InputField from '../ui/InputField';
+import { IUserRegister } from '@/types/user';
 
 const Form = styled.form`
   display: flex;
@@ -32,16 +33,20 @@ const SubmitButton = styled.button`
 
 interface RegisterFormProps {
   onSubmit: (
-    username: string,
+    name: string,
     email: string,
-    password: string
-  ) => Promise<void>;
+    password: string,
+    username: string,
+    phone: string
+  ) => Promise<IUserRegister>;
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({onSubmit}) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
   const [error, setError] = useState<string>();
   const t = useTranslations('Register');
 
@@ -49,12 +54,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onSubmit}) => {
     e.preventDefault();
     setError(undefined);
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !username || !phone) {
       setError('Todos los campos son obligatorios.');
       return;
     }
 
-    await onSubmit(name, email, password);
+    await onSubmit(name, email, password, username, phone);
   };
 
   return (
@@ -65,6 +70,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onSubmit}) => {
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
+      />
+      <InputField
+        label={t('username')}
+        name="username"
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <InputField
         label={t('email')}
@@ -79,6 +91,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onSubmit}) => {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+      />
+      <InputField
+        label={t('phone')}
+        name="phone"
+        type="text"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <SubmitButton type="submit">{t('submit')}</SubmitButton>

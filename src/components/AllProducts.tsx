@@ -4,20 +4,22 @@ import { GetAllProducts } from "@/app/api/products/actions";
 import ProductCard from "@/ui/ProductCard";
 import { Product } from "@/types/product";
 import React, { useEffect, useState } from "react";
-
-
+import { useSession } from "next-auth/react";
 
 const AllProducts = () =>{
     const [products,setProducts] = useState<Product[]|null>(null)
     const [loading, setLoading] = useState<boolean>(true)
-
+    const { data: session } = useSession();
+    const token = session?.user.access_token.access_token as string
+    console.log("session",session)
     console.log(products)
-
+    
     useEffect(()=>{
+        
         const getData = async ()=>{
             setLoading(true)
             try {
-                const products:Product[]=await GetAllProducts();
+                const products:Product[]=await GetAllProducts(token);
                 setProducts(products)
             } catch (error) {
                 console.error('Error al obtener los productos:',error)
@@ -27,7 +29,7 @@ const AllProducts = () =>{
         };
 
         getData();
-    },[])
+    },[token])
     return(
         <>
             <div>

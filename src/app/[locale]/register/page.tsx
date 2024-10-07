@@ -11,17 +11,19 @@ const RegisterPage: React.FC = () => {
   const handleRegistration = async (
     name: string,
     email: string,
-    password: string
+    password: string,
+    username: string,
+    phone: string,
   ) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({name, email, password})
+          body: JSON.stringify({name, email, password, username, phone})
         }
       );
 
@@ -30,7 +32,10 @@ const RegisterPage: React.FC = () => {
         throw new Error(errorData.message || 'Error en el registro.');
       }
 
+      const data = await response.json();
+      console.log('Usuario registrado:', data);
       router.push('/login');
+      return data;
     } catch (error) {
       console.error('Error al registrar el usuario:', error);
     }

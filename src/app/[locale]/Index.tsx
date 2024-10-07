@@ -1,9 +1,9 @@
 'use client';
 
 import {Session} from 'next-auth';
-import {signOut} from 'next-auth/react';
-import {useLocale, useTranslations} from 'next-intl';
+import {useTranslations} from 'next-intl';
 import PageLayout from '@/components/PageLayout';
+
 
 type Props = {
   session: Session | null;

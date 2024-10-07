@@ -30,6 +30,8 @@
     "name": "Name",
     "email": "Email",
     "password": "Password",
-    "submit": "Register"
+    "submit": "Register",
+    "username": "Username",
+    "phone": "Phone"
   }
 }

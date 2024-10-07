@@ -2,6 +2,8 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { clear } from 'console';
 
 export interface CartItem {
+    isLiked: boolean;
+    description: string;
     id: number;
     title: string;
     price: number;

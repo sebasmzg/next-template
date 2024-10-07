@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
   const locale = useLocale();
   const t = useTranslations('Login');
   const [error, setError] = useState<string>();
-  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
 
@@ -45,7 +45,7 @@ const LoginForm: React.FC = () => {
 
     const result = await signIn('credentials', {
       redirect: false,
-      email,
+      username,
       password
     });
 
@@ -60,10 +60,10 @@ const LoginForm: React.FC = () => {
     <Form onSubmit={onSubmit}>
       <InputField
         label={t('username')}
-        name="email"
-        onChange={(e) => setEmail(e.target.value)}
+        name="username"
+        onChange={(e) => setUsername(e.target.value)}
         type="text"
-        value={email}
+        value={username}
       />
       <InputField
         label={t('password')}

@@ -8,5 +8,13 @@ export type Product = {
     rating: {
         rate: number;
         count: number;
-    }
+    };
+    isLiked: boolean;
 };
+
+export interface CheckoutProduct {
+    products: CheckoutProduct[],
+    id: number;
+    quantity: number;
+    price: number;
+}

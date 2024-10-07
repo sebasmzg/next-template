@@ -6,11 +6,11 @@ const auth: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: {label:"email",type: 'text', placeholder: "email"},
-        password: {label:"password", type: 'password', placeholder: "password"}
+        username: {label:"username",type: 'text'},
+        password: {label:"password", type: 'password'}
       },
-      async authorize(credentials) {
-        const { email, password } = credentials || {};
+      async authorize(credentials: Record<"email" | "password", string> | any) {
+      
         try {
           const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
           if (!apiUrl) {
@@ -21,7 +21,7 @@ const auth: AuthOptions = {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ username: credentials.username, password: credentials.password }),
           });
 
           const user = await res.json();
@@ -42,6 +42,19 @@ const auth: AuthOptions = {
   pages: {
     signIn: "/login",
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token }) {
+      session.user.access_token = token as any;
+      return session;
+    },
+  },
+  secret: process.env.NEXTAUTH_URL,
+  session: {
+    strategy: "jwt",
+  }
 };
 
 export default auth;

@@ -5,9 +5,9 @@ import {signOut, useSession} from 'next-auth/react';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import LocaleSwitcher from './LocaleSwitcher';
-import {FaSearch, FaHeart, FaShoppingCart, FaSignOutAlt} from 'react-icons/fa';
+import {FaSignOutAlt} from 'react-icons/fa';
 import ShoppingCartButton from '@/ui/ShoopinCart';
-import Search from './Search';
+
 
 const NavbarWrapper = styled.nav`
   background-color: #fff; /* Fondo blanco */
@@ -99,12 +99,6 @@ const Navbar = () => {
             </NavLinks>
             <IconsWrapper>
               <LocaleSwitcher />
-              <IconButton aria-label="Search">
-                <Search />
-              </IconButton>
-              <IconButton aria-label="Favorites">
-                <FaHeart cursor={'pointer'} size={26} />
-              </IconButton>
               <IconButton aria-label="Cart">
                 <ShoppingCartButton />
               </IconButton>

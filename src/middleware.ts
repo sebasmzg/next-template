@@ -7,6 +7,7 @@ const publicPages = [
   '/',
   '/login',
   '/register',
+  '/secret/product-details'
 ];
 
 const intlMiddleware = createMiddleware(routing);
@@ -28,7 +29,7 @@ export default function middleware(req: NextRequest) {
   const publicPathnameRegex = RegExp(
     `^(/(${routing.locales.join('|')}))?(${publicPages
       .flatMap((p) => (p === '/' ? ['', '/'] : p))
-      .join('|')})/?$`,
+      .join('|')})($|/[^/]+)?$`,
     'i'
   );
   const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname);
@@ -41,6 +42,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // Skip all paths that should not be internationalized
   matcher: ['/((?!api|_next|.*\\..*).*)']
 };
