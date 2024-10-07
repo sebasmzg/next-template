@@ -9,7 +9,7 @@ interface PaymentButtonProps {
   items: CheckoutProduct[]; 
 }
 
-const PaymentButton: React.FC<PaymentButtonProps> = ({items}) => {
+const PaymentButton: React.FC<PaymentButtonProps> = () => {
   const {data: session} = useSession();
 
   const products = useSelector((state: RootState) => state.cart.items);

@@ -84,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             </Item>
           ))}
         </ItemList>
-        <PaymentButton items={items} />
+        <PaymentButton items={[]} />
       </SidebarContainer>
     </>
   );
